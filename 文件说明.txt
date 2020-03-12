@@ -1,0 +1,7 @@
+nRF5_SDK_15.3.0_59ac345            —— 官方sdk（Nordic）
+
+tuya_ble_lock_sdk                  —— 涂鸦sdk（详情参考readme）
+
+ble_app_uart_pca10040_s132.uvprojx —— keil工程文件快捷方式（相对路径，下载后可直接双击打开）
+
+clear.bat                          —— 工程清理脚本（打包转发给别人之前请先运行该脚本，删除编译生成的临时文件）
