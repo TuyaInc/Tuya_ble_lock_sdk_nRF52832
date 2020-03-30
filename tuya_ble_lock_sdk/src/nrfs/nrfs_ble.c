@@ -281,12 +281,20 @@ FN:
 */
 void nrfs_init_bt_mac_addr(void)
 {
+    bool is_auth = false;
     //set bt addr
     uint8_t tmp_mac_str[APP_PORT_BLE_ADDR_STR_LEN] = APP_PORT_DEFAULT_MAC_ADDR_STR;
     uint8_t mac[APP_PORT_BLE_ADDR_LEN];
-    app_port_kv_get("mac_str", tmp_mac_str, APP_PORT_BLE_ADDR_STR_LEN);
+    if(APP_PORT_BLE_ADDR_STR_LEN == app_port_kv_get("mac_str", tmp_mac_str, APP_PORT_BLE_ADDR_STR_LEN)) {
+        is_auth = true;
+    }
+    
     if(app_port_string_op_hexstr2hex(tmp_mac_str, APP_PORT_BLE_ADDR_STR_LEN, mac) == 1)
     {
+        if(!is_auth) {
+            app_port_reverse_byte(mac, APP_PORT_BLE_ADDR_LEN);
+        }
+        APP_DEBUG_HEXDUMP("Mac", 20, mac, APP_PORT_BLE_ADDR_LEN);
         app_port_set_bt_mac_addr(mac);
     }
 }

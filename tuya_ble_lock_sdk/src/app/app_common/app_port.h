@@ -50,9 +50,9 @@ extern "C"
 #define TUYA_DEVICE_AUTH_KEY    "fYUftqd2K2mq1BuMs9dYr7tGWg4zloy5" //32Byte
 
 #define TUYA_DEVICE_FIR_NAME    "tuya_ble_lock_common_nRF52832"    //固件标识名
-#define TUYA_DEVICE_FVER_NUM    0x00000101                         //固件版本
+#define TUYA_DEVICE_FVER_NUM    0x00000102                         //固件版本
 #define TUYA_DEVICE_HVER_NUM    0x00000100                         //硬件版本
-#define TUYA_DEVICE_FVER_STR    "1.1"                              //固件版本str
+#define TUYA_DEVICE_FVER_STR    "1.2"                              //固件版本str
 #define TUYA_DEVICE_HVER_STR    "1.0"                              //硬件版本str
 
 /*********************************************************  ble  *********************************************************/

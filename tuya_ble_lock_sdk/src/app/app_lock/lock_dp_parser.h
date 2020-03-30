@@ -79,8 +79,8 @@ extern "C"
 #define  WR_SET_HAND_LOCK                         46  //锁的设置-手动落锁
 #define  OR_STS_LOCK_STATE                        47  //状态同步-锁开合状态
 #define  WR_SET_MOTOR_DIRECTION                   48  //锁的设置-锁贴电机转动方向
-#define  WR_SET_USER_FREEZE                       49  //锁的设置-解冻用户
-#define  WR_SET_USER_UNFREEZE                     50  //锁的设置-冻结用户
+#define  WR_SET_USER_FREEZE                       49  //锁的设置-冻结用户
+#define  WR_SET_USER_UNFREEZE                     50  //锁的设置-解冻用户
 #define  WR_BSC_TEMP_PW_CREAT                     51  //基础功能-添加临时密码
 #define  WR_BSC_TEMP_PW_DELETE                    52  //基础功能-删除临时密码
 #define  WR_BSC_TEMP_PW_MODIFY                    53  //基础功能-修改临时密码

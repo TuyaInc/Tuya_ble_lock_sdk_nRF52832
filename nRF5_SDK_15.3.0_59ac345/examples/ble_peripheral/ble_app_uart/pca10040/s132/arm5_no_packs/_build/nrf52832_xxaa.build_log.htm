@@ -27,9 +27,9 @@ Project File Date:  03/03/2020
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'nrf52832_xxaa'
-compiling app_test.c...
+compiling lock_dp_parser.c...
 linking...
-Program Size: Code=94756 RO-data=17148 RW-data=896 ZI-data=40200  
+Program Size: Code=94788 RO-data=17148 RW-data=896 ZI-data=40200  
 FromELF: creating hex file...
 After Build - User command #1: .\ota\mkbin.bat
 D:\office\workspace\Nordic\Tuya_ble_lock_sdk_nRF52832\nRF5_SDK_15.3.0_59ac345\examples\ble_peripheral\ble_app_uart\pca10040\s132\arm5_no_packs>copy _build\nrf52832_xxaa.hex .\hex\tuya_ble_lock_common_nRF52832.hex 
@@ -39,9 +39,9 @@ D:\office\workspace\Nordic\Tuya_ble_lock_sdk_nRF52832\nRF5_SDK_15.3.0_59ac345\ex
 D:\office\workspace\Nordic\Tuya_ble_lock_sdk_nRF52832\nRF5_SDK_15.3.0_59ac345\examples\ble_peripheral\ble_app_uart\pca10040\s132\arm5_no_packs>.\ota\hex2bin -k 1 .\ota\tuya_ble_lock_common_nRF52832.hex 
 hex2bin v1.0.10, Copyright (C) 2012 Jacques Pelletier & contributors
 Lowest address  = 00026000
-Highest address = 000415EF
+Highest address = 00041613
 Pad Byte        = FF
-16-bit Checksum = BBB7
+16-bit Checksum = 07A2
 After Build - User command #2: .\hex\mergehex.bat
 D:\office\workspace\Nordic\Tuya_ble_lock_sdk_nRF52832\nRF5_SDK_15.3.0_59ac345\examples\ble_peripheral\ble_app_uart\pca10040\s132\arm5_no_packs>.\hex\mergehex -m .\hex\s132_nrf52_6.1.1_softdevice.hex .\hex\nrf52832_xxaa_s132.hex  -o .\hex\softdeviceAndBootLoader.hex 
 Parsing input hex files.
@@ -73,9 +73,9 @@ Package Vendor: NordicSemiconductor
    * Component: ARM::CMSIS:CORE:4.3.0
 
    * Component: NordicSemiconductor::Device:Startup:8.24.1
+      Include file:  Device\Include\system_nrf52.h
       Source file:   Device\Source\arm\arm_startup_nrf52.s
       Source file:   Device\Source\system_nrf52.c
-      Include file:  Device\Include\system_nrf52.h
 Build Time Elapsed:  00:00:05
 </pre>
 </body>
