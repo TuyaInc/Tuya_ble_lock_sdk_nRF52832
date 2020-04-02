@@ -72,6 +72,7 @@ static void app_common_tuya_ble_sdk_callback(tuya_ble_cb_evt_param_t* param)
             if(param->connect_status == BONDING_CONN) {
                 APP_DEBUG_PRINTF("bonding and connecting");
                 lock_timer_stop(LOCK_TIMER_CONN_MONITOR);
+                lock_timer_start(LOCK_TIMER_CONN_PARAM_UPDATE);
             }
         } break;
         
@@ -179,7 +180,6 @@ static void app_common_evt_process(void *p_param)
         } break;
         
         case APP_EVT_BLE_GAP_EVT_CONNECTED: {
-            lock_timer_start(LOCK_TIMER_CONN_PARAM_UPDATE);
             lock_timer_start(LOCK_TIMER_CONN_MONITOR);
         } break;
         

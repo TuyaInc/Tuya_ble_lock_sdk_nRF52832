@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\_build\nrf52832_xxaa.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\_build\nrf52832_xxaa.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Mar 27 21:17:23 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Apr 02 20:50:39 2020
 <BR><P>
 <H3>Maximum Stack Usage =       1416 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -496,11 +496,11 @@ Global Symbols
 <LI><a href="#[3b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tuya_ble_storage_load_settings
 <LI><a href="#[16e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tuya_ble_storage_save_sys_settings
 <LI><a href="#[16d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tuya_ble_storage_save_auth_settings
-<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_uart_init
-<LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_uart_init
 <LI><a href="#[2b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_data_length_update_evt
 <LI><a href="#[1c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;conn_handle_list_get
 <LI><a href="#[1a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;record_purge_disconnected
+<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_uart_init
+<LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_uart_init
 <LI><a href="#[17e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_drv_uart_init
 <LI><a href="#[375]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tuya_ble_event_send
 <LI><a href="#[361]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tuya_ble_adv_change
@@ -552,9 +552,6 @@ Global Symbols
 <LI><a href="#[3b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tuya_ble_storage_load_settings
 <LI><a href="#[146]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_flash_init
 <LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_dfu_settings_init
-<LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_env
-<LI><a href="#[28e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbedtls_md5_finish_ret
-<LI><a href="#[1ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_nus_init
 <LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_write
 <LI><a href="#[1b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_hvx_tx_complete
 <LI><a href="#[1b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_connect
@@ -565,6 +562,9 @@ Global Symbols
 <LI><a href="#[2b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_scan_connect_with_target
 <LI><a href="#[1af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;characteristic_add
 <LI><a href="#[196]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bcs_internal_state_reset
+<LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move_env
+<LI><a href="#[28e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mbedtls_md5_finish_ret
+<LI><a href="#[1ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_nus_init
 <LI><a href="#[2eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_backend_serial_put
 <LI><a href="#[20e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;event_send
 <LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write
@@ -1239,9 +1239,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 280<LI>Call Chain = app_error_fault_handler &rArr; nrf_log_frontend_dequeue &rArr; nrf_log_frontend_std_0 &rArr; std_n &rArr;  nrf_log_frontend_dequeue (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elog_output
+<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
 <LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_panic
 <LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_dequeue
-<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_get
 </UL>
 <BR>[Called By]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_error_handler_bare
 </UL>
@@ -1263,6 +1263,9 @@ Global Symbols
 <LI><a href="#[151]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_set_bt_mac_addr
 <LI><a href="#[146]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_flash_init
 <LI><a href="#[12e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_conn_param_update
+<LI><a href="#[279]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;power_management_init
+<LI><a href="#[272]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;log_init
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_evt_handler
 <LI><a href="#[34c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtc2_config
 <LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_uart_get
 <LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_uart_init
@@ -1279,9 +1282,6 @@ Global Symbols
 <LI><a href="#[282]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_adv_start
 <LI><a href="#[27d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_adv_init
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scan_evt_handler
-<LI><a href="#[279]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;power_management_init
-<LI><a href="#[272]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;log_init
-<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_evt_handler
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_soc_evts_poll
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_ble_evts_poll
 <LI><a href="#[30a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;softdevices_evt_irq_enable
@@ -1823,10 +1823,10 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sd_nvic_critical_region_enter
 </UL>
 <BR>[Called By]<UL><LI><a href="#[316]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_enter_critical
+<LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_pwr_mgmt_run
 <LI><a href="#[309]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_enable_request
 <LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_dequeue
 <LI><a href="#[201]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elog_port_output_lock
-<LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_pwr_mgmt_run
 <LI><a href="#[2d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_drv_clock_lfclk_release
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sd_state_evt_handler
 <LI><a href="#[32b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfx_prs_acquire
@@ -1844,10 +1844,10 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[186]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__sd_nvic_irq_disable
 </UL>
 <BR>[Called By]<UL><LI><a href="#[317]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_exit_critical
+<LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_pwr_mgmt_run
 <LI><a href="#[309]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_enable_request
 <LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_dequeue
 <LI><a href="#[202]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elog_port_output_unlock
-<LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_pwr_mgmt_run
 <LI><a href="#[2d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_drv_clock_lfclk_release
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sd_state_evt_handler
 <LI><a href="#[32b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfx_prs_acquire
@@ -1872,10 +1872,10 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[198]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_conn_state_conn_idx
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_nus_data_send
-<LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_write
+<BR>[Called By]<UL><LI><a href="#[1b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_write
 <LI><a href="#[1b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_hvx_tx_complete
 <LI><a href="#[1b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_connect
+<LI><a href="#[1ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_nus_data_send
 </UL>
 
 <P><STRONG><a name="[199]"></a>ble_advdata_search</STRONG> (Thumb, 64 bytes, Stack size 12 bytes, ble_advdata.o(i.ble_advdata_search))
@@ -2343,6 +2343,8 @@ Global Symbols
 <LI><a href="#[31e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_svc_send_data
 <LI><a href="#[31b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_flash_write
 <LI><a href="#[318]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_flash_erase
+<LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_error_fault_handler
+<LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fstorage_evt_handler
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ef_log_debug
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_event_handle
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_ble_evt_handler
@@ -2356,8 +2358,6 @@ Global Symbols
 <LI><a href="#[203]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elog_set_fmt
 <LI><a href="#[1fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;elog_set_filter_lvl
 <LI><a href="#[1fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_fmt_enabled
-<LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_error_fault_handler
-<LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fstorage_evt_handler
 </UL>
 
 <P><STRONG><a name="[1f2]"></a>elog_output_lock</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, elog.o(i.elog_output_lock))
@@ -3078,6 +3078,11 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 1416<LI>Call Chain = main &rArr; idle_state_handle &rArr; tuya_ble_main_tasks_exec &rArr; tuya_sched_execute &rArr; tuya_ble_event_process &rArr; tuya_ble_handle_ble_cmd_evt &rArr; tuya_ble_evt_process &rArr; tuya_ble_handle_ble_factory_test_req &rArr; tuya_ble_app_production_test_process &rArr; app_port_factory_test_process &rArr; factory_test_process &rArr; lock_hard_uart_simulate &rArr; lock_open_record_combine_report &rArr; lock_evt_save &rArr; lock_evtid_save &rArr; app_port_kv_set &rArr; ef_set_env_blob &rArr; set_env &rArr; del_env &rArr; find_env &rArr; find_env_no_cache &rArr; env_iterator &rArr; read_sector_meta_data &rArr; read_env &rArr; write_status &rArr; ef_port_write &rArr; ef_log_debug &rArr; elog_output &rArr;  elog_output (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[23a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lock_common_init
+<LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_conn_state_init
+<LI><a href="#[279]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;power_management_init
+<LI><a href="#[272]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;log_init
+<LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;idle_state_handle
+<LI><a href="#[283]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_test
 <LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_uart_init
 <LI><a href="#[27e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_svc_init
 <LI><a href="#[281]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_init_bt_mac_addr
@@ -3088,11 +3093,6 @@ Global Symbols
 <LI><a href="#[282]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_adv_start
 <LI><a href="#[27d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_adv_init
 <LI><a href="#[278]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_log_init
-<LI><a href="#[19d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_conn_state_init
-<LI><a href="#[279]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;power_management_init
-<LI><a href="#[272]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;log_init
-<LI><a href="#[21f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;idle_state_handle
-<LI><a href="#[283]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_test
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
@@ -3497,16 +3497,16 @@ Global Symbols
 <P><STRONG><a name="[2c0]"></a>nrf_ble_scan_params_set</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, nrf_ble_scan.o(i.nrf_ble_scan_params_set))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = nrf_ble_scan_params_set
 </UL>
-<BR>[Calls]<UL><LI><a href="#[2b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_scan_stop
-<LI><a href="#[2b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_scan_default_param_set
+<BR>[Calls]<UL><LI><a href="#[2b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_scan_default_param_set
+<LI><a href="#[2b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_scan_stop
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[27f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_scan_init
 </UL>
 
 <P><STRONG><a name="[2b7]"></a>nrf_ble_scan_stop</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, nrf_ble_scan.o(i.nrf_ble_scan_stop))
-<BR><BR>[Called By]<UL><LI><a href="#[2c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_scan_params_set
-<LI><a href="#[2b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_scan_connect_with_target
+<BR><BR>[Called By]<UL><LI><a href="#[2b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_scan_connect_with_target
+<LI><a href="#[2c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_scan_params_set
 </UL>
 
 <P><STRONG><a name="[2c1]"></a>nrf_dfu_flash_erase</STRONG> (Thumb, 66 bytes, Stack size 24 bytes, nrf_dfu_flash.o(i.nrf_dfu_flash_erase))
@@ -3777,12 +3777,12 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[2f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;std_n
 </UL>
 <BR>[Called By]<UL><LI><a href="#[133]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_dfu_settings_init
-<LI><a href="#[302]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_ble_enable
-<LI><a href="#[300]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_ble_default_cfg_set
-<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_gatt_on_ble_evt
 <LI><a href="#[2b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_exchange_mtu_request_evt
 <LI><a href="#[2b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_connected_evt
 <LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;data_length_update
+<LI><a href="#[302]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_ble_enable
+<LI><a href="#[300]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_ble_default_cfg_set
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_gatt_on_ble_evt
 <LI><a href="#[2cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;settings_backup
 <LI><a href="#[2c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_dfu_flash_store
 <LI><a href="#[2c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_dfu_flash_erase
@@ -3793,8 +3793,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[2f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;std_n
 </UL>
-<BR>[Called By]<UL><LI><a href="#[302]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_ble_enable
-<LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;data_length_update
+<BR>[Called By]<UL><LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;data_length_update
+<LI><a href="#[302]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_ble_enable
 </UL>
 
 <P><STRONG><a name="[2db]"></a>nrf_log_frontend_std_3</STRONG> (Thumb, 40 bytes, Stack size 40 bytes, nrf_log_frontend.o(i.nrf_log_frontend_std_3))
@@ -4068,13 +4068,13 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[30d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_strerror_find
 </UL>
-<BR>[Called By]<UL><LI><a href="#[302]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_ble_enable
-<LI><a href="#[300]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_ble_default_cfg_set
-<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_gatt_on_ble_evt
-<LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_error_fault_handler
+<BR>[Called By]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_error_fault_handler
 <LI><a href="#[2b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_exchange_mtu_request_evt
 <LI><a href="#[2b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_connected_evt
 <LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;data_length_update
+<LI><a href="#[302]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_ble_enable
+<LI><a href="#[300]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_sdh_ble_default_cfg_set
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_gatt_on_ble_evt
 </UL>
 
 <P><STRONG><a name="[27d]"></a>nrfs_adv_init</STRONG> (Thumb, 126 bytes, Stack size 16 bytes, nrfs_scan_adv.o(i.nrfs_adv_init))
@@ -4093,8 +4093,8 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[30f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_adv_update_advDataAndScanRsp
 <LI><a href="#[151]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_set_bt_mac_addr
-<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_ble_evt_handler
 <LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrfs_ble_evt_handler
 </UL>
 
 <P><STRONG><a name="[310]"></a>nrfs_adv_state_update</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, nrfs_scan_adv.o(i.nrfs_adv_state_update))
@@ -5761,7 +5761,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[210]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lock_test_process
 </UL>
 
-<P><STRONG><a name="[3a]"></a>app_common_evt_process</STRONG> (Thumb, 176 bytes, Stack size 16 bytes, app_common.o(i.app_common_evt_process))
+<P><STRONG><a name="[3a]"></a>app_common_evt_process</STRONG> (Thumb, 170 bytes, Stack size 16 bytes, app_common.o(i.app_common_evt_process))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1224<LI>Call Chain = app_common_evt_process &rArr; delay_report_outtime_cb_handler &rArr; delay_report_outtime_handler &rArr; lock_open_record_report &rArr; lock_evt_save &rArr; lock_evtid_save &rArr; app_port_kv_set &rArr; ef_set_env_blob &rArr; set_env &rArr; del_env &rArr; find_env &rArr; find_env_no_cache &rArr; env_iterator &rArr; read_sector_meta_data &rArr; read_env &rArr; write_status &rArr; ef_port_write &rArr; ef_log_debug &rArr; elog_output &rArr;  elog_output (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lock_timer_start
@@ -5784,7 +5784,7 @@ Local Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> app_common.o(i.app_common_evt_send)
 </UL>
-<P><STRONG><a name="[3b]"></a>app_common_tuya_ble_sdk_callback</STRONG> (Thumb, 222 bytes, Stack size 24 bytes, app_common.o(i.app_common_tuya_ble_sdk_callback))
+<P><STRONG><a name="[3b]"></a>app_common_tuya_ble_sdk_callback</STRONG> (Thumb, 228 bytes, Stack size 24 bytes, app_common.o(i.app_common_tuya_ble_sdk_callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1056<LI>Call Chain = app_common_tuya_ble_sdk_callback &rArr; lock_dp_parser_handler &rArr; open_meth_modify_handler &rArr; lock_hard_modify_all_by_memberid &rArr; lock_hardid_load_by_memberid &rArr; lock_hard_load &rArr; app_port_kv_get &rArr; ef_get_env_blob &rArr; get_env &rArr; find_env &rArr; find_env_no_cache &rArr; env_iterator &rArr; read_sector_meta_data &rArr; read_env &rArr; write_status &rArr; ef_port_write &rArr; ef_log_debug &rArr; elog_output &rArr;  elog_output (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lock_dp_parser_handler
@@ -6604,9 +6604,9 @@ Local Symbols
 <P><STRONG><a name="[21f]"></a>idle_state_handle</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, main.o(i.idle_state_handle))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1416<LI>Call Chain = idle_state_handle &rArr; tuya_ble_main_tasks_exec &rArr; tuya_sched_execute &rArr; tuya_ble_event_process &rArr; tuya_ble_handle_ble_cmd_evt &rArr; tuya_ble_evt_process &rArr; tuya_ble_handle_ble_factory_test_req &rArr; tuya_ble_app_production_test_process &rArr; app_port_factory_test_process &rArr; factory_test_process &rArr; lock_hard_uart_simulate &rArr; lock_open_record_combine_report &rArr; lock_evt_save &rArr; lock_evtid_save &rArr; app_port_kv_set &rArr; ef_set_env_blob &rArr; set_env &rArr; del_env &rArr; find_env &rArr; find_env_no_cache &rArr; env_iterator &rArr; read_sector_meta_data &rArr; read_env &rArr; write_status &rArr; ef_port_write &rArr; ef_log_debug &rArr; elog_output &rArr;  elog_output (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_dequeue
-<LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tuya_ble_main_tasks_exec
+<BR>[Calls]<UL><LI><a href="#[220]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tuya_ble_main_tasks_exec
 <LI><a href="#[221]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_pwr_mgmt_run
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_log_frontend_dequeue
 </UL>
 <BR>[Called By]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -6667,8 +6667,8 @@ Local Symbols
 <P><STRONG><a name="[1c9]"></a>conn_params_negotiation</STRONG> (Thumb, 78 bytes, Stack size 24 bytes, ble_conn_params.o(i.conn_params_negotiation))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = conn_params_negotiation &rArr; app_timer_start &rArr; timer_start_op_schedule &rArr; app_util_critical_region_enter &rArr; sd_nvic_critical_region_enter
 </UL>
-<BR>[Calls]<UL><LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_timer_start
-<LI><a href="#[1ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_error_evt
+<BR>[Calls]<UL><LI><a href="#[1ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_error_evt
+<LI><a href="#[176]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_timer_start
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_write
 <LI><a href="#[1a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_connect
@@ -6713,9 +6713,9 @@ Local Symbols
 <P><STRONG><a name="[1a5]"></a>on_disconnect</STRONG> (Thumb, 50 bytes, Stack size 24 bytes, ble_conn_params.o(i.on_disconnect))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = on_disconnect &rArr; app_timer_stop &rArr; timer_stop_op_schedule &rArr; app_util_critical_region_enter &rArr; sd_nvic_critical_region_enter
 </UL>
-<BR>[Calls]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_timer_stop
-<LI><a href="#[1ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_error_evt
+<BR>[Calls]<UL><LI><a href="#[1ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_error_evt
 <LI><a href="#[340]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;instance_get
+<LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_timer_stop
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_evt_handler
 </UL>
@@ -6723,11 +6723,11 @@ Local Symbols
 <P><STRONG><a name="[1a6]"></a>on_write</STRONG> (Thumb, 82 bytes, Stack size 24 bytes, ble_conn_params.o(i.on_write))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = on_write &rArr; conn_params_negotiation &rArr; app_timer_start &rArr; timer_start_op_schedule &rArr; app_util_critical_region_enter &rArr; sd_nvic_critical_region_enter
 </UL>
-<BR>[Calls]<UL><LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_timer_stop
-<LI><a href="#[1b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_srv_is_notification_enabled
+<BR>[Calls]<UL><LI><a href="#[1b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_srv_is_notification_enabled
 <LI><a href="#[1ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_error_evt
 <LI><a href="#[340]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;instance_get
 <LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;conn_params_negotiation
+<LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_timer_stop
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ble_evt_handler
 </UL>
@@ -6808,8 +6808,8 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[2af]"></a>link_init</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, nrf_ble_gatt.o(i.link_init))
-<BR><BR>[Called By]<UL><LI><a href="#[2ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_gatt_init
-<LI><a href="#[2b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_disconnected_evt
+<BR><BR>[Called By]<UL><LI><a href="#[2b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;on_disconnected_evt
+<LI><a href="#[2ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ble_gatt_init
 </UL>
 
 <P><STRONG><a name="[2b0]"></a>on_connected_evt</STRONG> (Thumb, 134 bytes, Stack size 32 bytes, nrf_ble_gatt.o(i.on_connected_evt))
@@ -8016,9 +8016,9 @@ Local Symbols
 <P><STRONG><a name="[1b5]"></a>buf_prealloc</STRONG> (Thumb, 222 bytes, Stack size 40 bytes, nrf_log_frontend.o(i.buf_prealloc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = buf_prealloc &rArr; log_skip &rArr; nrf_atomic_flag_set &rArr; nrf_atomic_u32_or
 </UL>
-<BR>[Calls]<UL><LI><a href="#[185]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_util_critical_region_exit
+<BR>[Calls]<UL><LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_atomic_u32_add
+<LI><a href="#[185]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_util_critical_region_exit
 <LI><a href="#[183]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;app_util_critical_region_enter
-<LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_atomic_u32_add
 <LI><a href="#[1b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;log_skip
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;std_n
