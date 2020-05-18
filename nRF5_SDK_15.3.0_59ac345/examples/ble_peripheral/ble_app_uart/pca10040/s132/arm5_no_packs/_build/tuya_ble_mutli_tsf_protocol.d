@@ -1,9 +1,0 @@
-.\_build\tuya_ble_mutli_tsf_protocol.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\tuya_ble_sdk\src\tuya_ble_mutli_tsf_protocol.c
-.\_build\tuya_ble_mutli_tsf_protocol.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-.\_build\tuya_ble_mutli_tsf_protocol.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\_build\tuya_ble_mutli_tsf_protocol.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\_build\tuya_ble_mutli_tsf_protocol.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\tuya_ble_sdk\include\tuya_ble_type.h
-.\_build\tuya_ble_mutli_tsf_protocol.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\_build\tuya_ble_mutli_tsf_protocol.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\tuya_ble_sdk\include\tuya_ble_config.h
-.\_build\tuya_ble_mutli_tsf_protocol.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\tuya_ble_sdk\include\tuya_ble_mem.h
-.\_build\tuya_ble_mutli_tsf_protocol.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\tuya_ble_sdk\include\tuya_ble_mutli_tsf_protocol.h

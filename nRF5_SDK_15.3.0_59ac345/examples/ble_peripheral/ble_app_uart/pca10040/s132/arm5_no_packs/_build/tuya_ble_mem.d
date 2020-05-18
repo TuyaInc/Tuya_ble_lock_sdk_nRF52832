@@ -1,9 +1,0 @@
-.\_build\tuya_ble_mem.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\tuya_ble_sdk\src\tuya_ble_mem.c
-.\_build\tuya_ble_mem.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-.\_build\tuya_ble_mem.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\_build\tuya_ble_mem.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\_build\tuya_ble_mem.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\tuya_ble_sdk\include\tuya_ble_type.h
-.\_build\tuya_ble_mem.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\_build\tuya_ble_mem.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\tuya_ble_sdk\include\tuya_ble_config.h
-.\_build\tuya_ble_mem.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\tuya_ble_sdk\include\tuya_ble_heap.h
-.\_build\tuya_ble_mem.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\tuya_ble_sdk\include\tuya_ble_mem.h
