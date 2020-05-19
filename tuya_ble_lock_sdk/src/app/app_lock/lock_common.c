@@ -22,7 +22,6 @@
 /*********************************************************************
  * VARIABLES
  */
-uint8_t g_open_with_bt_flag = 1;
 
 
 
@@ -32,7 +31,9 @@ FN:
 */
 void lock_common_init(void)
 {
-    app_port_kv_init();
+    app_ota_init();
+    
+    app_port_nv_init();
     
     app_port_local_clock_start();
     
@@ -40,8 +41,8 @@ void lock_common_init(void)
     
     app_common_init();
     
-    APP_DEBUG_HEXDUMP("Auth key", 40, tuya_ble_current_para.auth_settings.auth_key, AUTH_KEY_LEN);
-    APP_DEBUG_HEXDUMP("Device id", 20, tuya_ble_current_para.auth_settings.device_id, DEVICE_ID_LEN);
+    APP_DEBUG_HEXDUMP("auth key", tuya_ble_current_para.auth_settings.auth_key, AUTH_KEY_LEN);
+    APP_DEBUG_HEXDUMP("device id", tuya_ble_current_para.auth_settings.device_id, DEVICE_ID_LEN);
 }
 
 /*********************************************************
@@ -64,7 +65,7 @@ FN:
 uint32_t lock_open_with_bt(void)
 {
     //open success
-    if(g_open_with_bt_flag)
+    if(!g_auto_switch.open_with_bt_flag)
     {
         APP_DEBUG_PRINTF("lock_open_with_bt");
         return APP_PORT_SUCCESS;
@@ -78,7 +79,7 @@ FN:
 uint32_t lock_open_with_nopwd_remote(void)
 {
     //open success
-    if(g_open_with_bt_flag)
+    if(!g_auto_switch.open_with_bt_flag)
     {
         APP_DEBUG_PRINTF("lock_open_with_nopwd_remote");
         return APP_PORT_SUCCESS;

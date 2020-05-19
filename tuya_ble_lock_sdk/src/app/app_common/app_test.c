@@ -19,7 +19,7 @@
 static volatile bool s_app_test_mode = false;
 volatile bool s_app_test_mode_enter_outtime_flag = false;
 //record last cmd
-static int16_t s_app_test_last_cmd;
+static volatile int16_t s_app_test_last_cmd;
 
 /*********************************************************************
  * LOCAL FUNCTION
@@ -136,7 +136,7 @@ static void app_test_process(uint8_t cmd, uint8_t* buf, uint16_t size)
         } break;
         
 		case APP_TEST_CMD_WRITE_HID: {
-            app_port_kv_set("hid_str", &buf[8], APP_TEST_H_ID_LEN);
+            app_port_nv_set(SF_AREA_0, NV_ID_APP_TEST_HID_STR, &buf[8], APP_TEST_H_ID_LEN);
             
             uint8_t tmp_buf[] = "{\"ret\":true}";
             app_test_rsp(cmd, tmp_buf, strlen((void*)tmp_buf));
@@ -221,7 +221,7 @@ static void app_test_write_auth_info_handler(uint8_t cmd, uint8_t* buf, uint16_t
     if(app_port_string_op_hexstr2hex(&buf[78], APP_PORT_BLE_ADDR_STR_LEN, mac) == 1)
     {
         app_port_set_bt_mac_addr(&mac[0]);
-        app_port_kv_set("mac_str", &buf[78], APP_PORT_BLE_ADDR_STR_LEN);
+        app_port_nv_set(SF_AREA_0, NV_ID_APP_TEST_MAC_STR, &buf[78], APP_PORT_BLE_ADDR_STR_LEN);
         
         uint8_t tmp_buf[] = "{\"ret\":true}";
         app_test_rsp(APP_TEST_CMD_WRITE_AUTH_INFO, tmp_buf, strlen((void*)tmp_buf));
@@ -243,8 +243,8 @@ static void app_test_query_info_handler(uint8_t cmd, uint8_t* buf, uint16_t size
 
     #define TRUE_LEN 4
     memcpy(&tmp_buf[0], "true", TRUE_LEN);
-    app_port_kv_set("NV_IF_AUTH", &tmp_buf[0], TRUE_LEN);
-    app_port_kv_get("NV_IF_AUTH", &tmp_buf[TRUE_LEN], TRUE_LEN); 
+    app_port_nv_set(SF_AREA_0, NV_ID_APP_TEST_NV_IF_AUTH, &tmp_buf[0], TRUE_LEN);
+    app_port_nv_get(SF_AREA_0, NV_ID_APP_TEST_NV_IF_AUTH, &tmp_buf[TRUE_LEN], TRUE_LEN);
     if(0 == memcmp(&tmp_buf[0],&tmp_buf[TRUE_LEN], TRUE_LEN))
     {
         //ret true
@@ -277,7 +277,7 @@ static void app_test_query_info_handler(uint8_t cmd, uint8_t* buf, uint16_t size
         tmp_buf[i++] = '\"';
         tmp_buf[i++] = ':';
         tmp_buf[i++] = '\"';
-        app_port_kv_get("hid_str", &tmp_buf[i], APP_TEST_H_ID_LEN);
+        app_port_nv_get(SF_AREA_0, NV_ID_APP_TEST_HID_STR, &tmp_buf[i], APP_TEST_H_ID_LEN);
         i += APP_TEST_H_ID_LEN;
         tmp_buf[i++] = '\"';
 
@@ -301,7 +301,7 @@ static void app_test_query_info_handler(uint8_t cmd, uint8_t* buf, uint16_t size
         tmp_buf[i++] = '\"';
         tmp_buf[i++] = ':';
         tmp_buf[i++] = '\"';
-        app_port_kv_get("mac_str", &tmp_buf[i], APP_PORT_BLE_ADDR_STR_LEN);
+        app_port_nv_get(SF_AREA_0, NV_ID_APP_TEST_MAC_STR, &tmp_buf[i], APP_PORT_BLE_ADDR_STR_LEN);
         i += APP_PORT_BLE_ADDR_STR_LEN;
         tmp_buf[i++] = '\"';
 
@@ -391,7 +391,7 @@ FN:
 */
 void factory_test_process(uint8_t* p_in_data, uint16_t in_len, uint8_t* p_out_data, uint16_t* out_len)
 {
-    APP_DEBUG_HEXDUMP("RX", 20, p_in_data, in_len);
+//    APP_DEBUG_HEXDUMP("RX", p_in_data, in_len);
     app_test_cmd_t* cmd = (void*)p_in_data;
     app_port_reverse_byte(&p_in_data[4], 2);//reverse cmd->len
     

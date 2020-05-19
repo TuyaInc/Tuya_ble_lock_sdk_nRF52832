@@ -109,6 +109,21 @@ void cpt_reverse_byte(void* buf, uint32_t size)
     }
 }
 
+/*********************************************************
+FN: 
+*/
+uint32_t cpt_num_array_2_int(uint8_t *num_array, uint32_t start_idx, uint32_t size)
+{
+    if(start_idx >= size) {
+        return (uint32_t)-1;
+    }
+    
+	uint32_t tmp_int = 0;
+	for (uint32_t idx=start_idx; idx<start_idx+size; idx++) {
+		tmp_int = (tmp_int*10) + num_array[idx];
+	}
+	return tmp_int;
+}
 
 
 

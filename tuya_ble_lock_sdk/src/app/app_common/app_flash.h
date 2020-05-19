@@ -30,11 +30,11 @@ extern "C"
  * CONSTANTS
  */
 //define different hard's max num, default value is 10, user can change it when needed
-#define HARDID_MAX_PASSWORD    30
-#define HARDID_MAX_DOORCARD    30
-#define HARDID_MAX_FINGER      30
-#define HARDID_MAX_FACE        30
-#define HARDID_MAX_TEMP_PW     30
+#define HARDID_MAX_PASSWORD    10
+#define HARDID_MAX_DOORCARD    10
+#define HARDID_MAX_FINGER      10
+#define HARDID_MAX_FACE        10
+#define HARDID_MAX_TEMP_PW     10
 #define HARDID_MAX_TOTAL       (HARDID_MAX_PASSWORD+HARDID_MAX_DOORCARD+HARDID_MAX_FINGER+HARDID_MAX_FACE+HARDID_MAX_TEMP_PW) //this value can not bigger then 255
 
 #define HARD_ID_INVALID        0xFFFFFFFF
@@ -46,6 +46,20 @@ extern "C"
 #define HARD_PASSWORD_MAX_LEN        10
 #define HARD_HARD_SN_MAX_LEN         20
 #define HARD_WELCOME_WORDS_MAX_LEN   50
+
+enum {
+    NV_ID_LOCK_SETTING = 0,
+    NV_ID_EVT_ID,
+    NV_ID_OFFLINE_PWD_COUNT,
+    NV_ID_T0_STORAGE,
+    NV_ID_OPEN_WITH_NOPWD_REMOTE,
+    NV_ID_APP_TEST_HID_STR,
+    NV_ID_APP_TEST_MAC_STR,
+    NV_ID_APP_TEST_NV_IF_AUTH,
+    NV_ID_OTA_FILE_MD5,
+    NV_ID_OTA_DATA_LEN,
+    NV_ID_OTA_DATA_CRC,
+};
 
 /*********************************************************************
  * STRUCT
@@ -82,6 +96,7 @@ typedef struct
     uint8_t  hand_lock;
     uint8_t  motor_direction;
     uint8_t  motor_torque;
+    uint8_t  awayhome_arming;
 } lock_settings_t;
 
 

@@ -58,7 +58,6 @@ static void nrfs_ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
                 nrfs_adv_state_update(false);
                 m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
                 tuya_ble_connected_handler();
-                
                 app_common_evt_send_only_evt(APP_EVT_BLE_GAP_EVT_CONNECTED);
             }
         } break;
@@ -70,9 +69,9 @@ static void nrfs_ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             }
             m_conn_handle = BLE_CONN_HANDLE_INVALID;
             tuya_ble_disconnected_handler();
-            nrfs_adv_start();
-            
             app_common_evt_send_only_evt(APP_EVT_BLE_GAP_EVT_DISCONNECTED);
+            
+            nrfs_adv_start();
         } break;
 
         case BLE_GAP_EVT_TIMEOUT: {
@@ -285,7 +284,7 @@ void nrfs_init_bt_mac_addr(void)
     //set bt addr
     uint8_t tmp_mac_str[APP_PORT_BLE_ADDR_STR_LEN] = APP_PORT_DEFAULT_MAC_ADDR_STR;
     uint8_t mac[APP_PORT_BLE_ADDR_LEN];
-    if(APP_PORT_BLE_ADDR_STR_LEN == app_port_kv_get("mac_str", tmp_mac_str, APP_PORT_BLE_ADDR_STR_LEN)) {
+    if(APP_PORT_BLE_ADDR_STR_LEN == app_port_nv_get(SF_AREA_0, NV_ID_APP_TEST_MAC_STR, tmp_mac_str, APP_PORT_BLE_ADDR_STR_LEN)) {
         is_auth = true;
     }
     
@@ -294,7 +293,7 @@ void nrfs_init_bt_mac_addr(void)
         if(!is_auth) {
             app_port_reverse_byte(mac, APP_PORT_BLE_ADDR_LEN);
         }
-        APP_DEBUG_HEXDUMP("Mac", 20, mac, APP_PORT_BLE_ADDR_LEN);
+        APP_DEBUG_HEXDUMP("Mac", mac, APP_PORT_BLE_ADDR_LEN);
         app_port_set_bt_mac_addr(mac);
     }
 }

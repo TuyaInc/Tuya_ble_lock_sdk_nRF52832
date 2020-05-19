@@ -27,7 +27,7 @@ extern "C"
 //cpt
 #include "cpt_math.h"
 #include "cpt_string_op.h"
-#include "easyflash.h"
+#include "sf_port.h"
 #include "elog.h"
 #include "sha1.h"
 #include "hmac-sha1.h"
@@ -36,6 +36,7 @@ extern "C"
 #include "tuya_ble_mem.h"
 #include "tuya_ble_mutli_tsf_protocol.h"
 #include "tuya_ble_main.h" //tuya_ble_current_para
+#include "tuya_ble_unix_time.h" //tuya_ble_time_struct_data_t
 //nrfs
 #include "nrfs_common.h"
 //app
@@ -45,18 +46,18 @@ extern "C"
  * CONSTANTS
  */
 /*********************************************************  tuya  *********************************************************/
-#define TUYA_DEVICE_PID         "eq1ebzwt"
-#define TUYA_DEVICE_DID         "tuya3c9983a10a0a"                 //16Byte 
-#define TUYA_DEVICE_AUTH_KEY    "fYUftqd2K2mq1BuMs9dYr7tGWg4zloy5" //32Byte
+#define TUYA_DEVICE_PID         "3bmxfsql"
+#define TUYA_DEVICE_DID         "tuya227c906c10df"                 //16Byte
+#define TUYA_DEVICE_AUTH_KEY    "hG0bTzevOpzC42n2g77FBj4zb7iXf1jE" //32Byte
 
-#define TUYA_DEVICE_FIR_NAME    "tuya_ble_lock_common_nRF52832"    //固件标识名
-#define TUYA_DEVICE_FVER_NUM    0x00000102                         //固件版本
+#define TUYA_DEVICE_FIR_NAME    "tuya_ble_lock_common_bk3431q"    //固件标识名
+#define TUYA_DEVICE_FVER_NUM    0x00000104                         //固件版本
 #define TUYA_DEVICE_HVER_NUM    0x00000100                         //硬件版本
-#define TUYA_DEVICE_FVER_STR    "1.2"                              //固件版本str
+#define TUYA_DEVICE_FVER_STR    "1.4"                              //固件版本str
 #define TUYA_DEVICE_HVER_STR    "1.0"                              //硬件版本str
 
 /*********************************************************  ble  *********************************************************/
-#define APP_PORT_DEFAULT_MAC_ADDR_STR    "DC234D08C8EF"
+#define APP_PORT_DEFAULT_MAC_ADDR_STR    "DC234D08C8EB"
 
 #define APP_PORT_ADV_INTERVAL            152.5 //(1022.5) //ms
 #define APP_PORT_MIN_CONN_INTERVAL       NRFS_MIN_CONN_INTERVAL
@@ -124,11 +125,13 @@ typedef enum {
 /*********************************************************  Storage  *********************************************************/
 void *app_port_malloc(uint32_t size);
 uint32_t app_port_free(void* buf);
-uint32_t app_port_kv_init(void);
-uint32_t app_port_kv_set(const char *key, const void *buf, size_t size);
-uint32_t app_port_kv_get(const char *key, void *buf, size_t size);
-uint32_t app_port_kv_del(const char *key);
+uint32_t app_port_nv_init(void);
+uint32_t app_port_nv_set(uint32_t area_id, uint16_t id, void *buf, uint8_t size);
+uint32_t app_port_nv_get(uint32_t area_id, uint16_t id, void *buf, uint8_t size);
+uint32_t app_port_nv_del(uint32_t area_id, uint16_t id);
+uint32_t app_port_nv_set_default(void);
 uint32_t app_port_nv_write(uint32_t addr, const uint8_t* p_data, uint32_t size);
+uint32_t app_port_nv_read(uint32_t addr, uint8_t* p_data, uint32_t size);
 uint32_t app_port_nv_erase(uint32_t addr, uint32_t size);
 
 /*********************************************************  timer  *********************************************************/
@@ -139,6 +142,7 @@ uint32_t app_port_timer_stop(void* timer_id);
 uint32_t app_port_update_timestamp(uint32_t app_timestamp);
 uint32_t app_port_get_timestamp(void);
 uint32_t app_port_get_old_timestamp(uint32_t old_local_timestamp);
+uint32_t app_port_delay_ms(uint32_t ms);
 
 /*********************************************************  ble  *********************************************************/
 uint32_t app_port_dp_data_report(uint8_t *buf, uint32_t size);
@@ -169,10 +173,13 @@ uint16_t app_port_check_sum_16(uint8_t *buf, uint32_t size);
 uint16_t app_port_crc16_compute(uint8_t* buf, uint16_t size, uint16_t* p_crc);
 uint32_t app_port_crc32_compute(uint8_t* buf, uint32_t size, uint32_t* p_crc);
 void app_port_reverse_byte(void* buf, uint32_t size);
+uint32_t app_port_num_array_2_int(uint8_t *num_array, uint32_t start_idx, uint32_t size);
+bool app_port_aes128_cbc_encrypt(uint8_t *key,uint8_t *iv,uint8_t *input,uint16_t input_len,uint8_t *output);
 
 /*********************************************************  string  *********************************************************/
 uint8_t app_port_string_op_hexstr2hex(uint8_t *hexstr, int len, uint8_t* hex);
 uint8_t app_port_string_op_hex2hexstr(uint8_t *hex, int len, uint8_t* hexstr);
+uint8_t app_port_string_op_intstr2int(uint8_t *hex, int len, int* sum);
 
 
 #ifdef __cplusplus

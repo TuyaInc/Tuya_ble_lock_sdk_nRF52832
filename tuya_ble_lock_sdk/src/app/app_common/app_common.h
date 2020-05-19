@@ -34,6 +34,7 @@ extern "C"
 #include "app_port.h"
 #include "app_flash.h"
 #include "app_ota.h"
+#include "app_active_report.h"
 #include "app_test.h"
 //app lock
 #include "lock_dp_parser.h"
@@ -41,6 +42,7 @@ extern "C"
 #include "lock_timer.h"
 #include "lock_hard.h"
 #include "lock_dynamic_pwd.h"
+#include "lock_offline_pwd.h"
 #include "lock_test.h"
 
 /*********************************************************************
@@ -66,6 +68,16 @@ typedef enum
     APP_EVT_TIMER_7,
     APP_EVT_TIMER_8,
     APP_EVT_TIMER_9,
+    APP_EVT_TIMER_10,
+    APP_EVT_TIMER_11,
+    APP_EVT_TIMER_12,
+    APP_EVT_TIMER_13,
+    APP_EVT_TIMER_14,
+    APP_EVT_TIMER_15,
+    APP_EVT_TIMER_16,
+    APP_EVT_TIMER_17,
+    APP_EVT_TIMER_18,
+    APP_EVT_TIMER_19,
 } app_evt_t;
 
 /*********************************************************************

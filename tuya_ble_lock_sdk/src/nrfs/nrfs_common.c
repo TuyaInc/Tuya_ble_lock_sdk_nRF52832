@@ -46,9 +46,9 @@ void nrfs_log_init(void)
 /*********************************************************
 FN: 
 */
-void nrfs_log_hexdump(const char *name, uint8_t width, uint8_t *buf, uint16_t size)
+void nrfs_log_hexdump(const char *name, uint8_t *buf, uint16_t size)
 {
-    elog_hexdump(name, width, buf, size);
+    elog_hexdump(name, 8, buf, size);
 }
 
 /*********************************************************

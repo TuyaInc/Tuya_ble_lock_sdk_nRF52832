@@ -50,6 +50,7 @@ uint32_t lock_hard_creat_sub_report_with_delay(uint8_t meth, uint8_t stage, uint
 uint32_t lock_open_record_report(uint8_t dp_id, uint32_t hardid);
 uint32_t lock_open_record_report_with_delay(uint8_t dp_id, uint32_t hardid);
 uint32_t lock_open_record_combine_report(uint8_t combine_enum, uint8_t size, uint8_t* hardid);
+uint32_t lock_open_record_report_offline_pwd(uint8_t dp_id, uint8_t* pwd);
 uint32_t lock_alarm_record_report(uint8_t alarm_reason);
 void lock_offline_evt_report(uint8_t status);
 void lock_open_meth_sync_new_report(uint8_t status);

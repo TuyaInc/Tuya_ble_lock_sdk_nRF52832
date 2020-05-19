@@ -46,6 +46,7 @@ uint16_t cpt_check_sum_16(uint8_t *buf, uint32_t size);
 uint16_t cpt_crc16_compute(uint8_t* buf, uint16_t size, uint16_t* p_crc);
 uint32_t cpt_crc32_compute(uint8_t* buf, uint32_t size, uint32_t* p_crc);
 void cpt_reverse_byte(void* buf, uint32_t size);
+uint32_t cpt_num_array_2_int(uint8_t *num_array, uint32_t start_idx, uint32_t size);
 
 
 #ifdef __cplusplus

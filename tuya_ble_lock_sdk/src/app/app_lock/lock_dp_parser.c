@@ -31,6 +31,7 @@ static uint32_t temp_pw_delete_handler(void* cmd_dp_data, void* rsp_dp_data, uin
 static uint32_t temp_pw_modify_handler(void* cmd_dp_data, void* rsp_dp_data, uint8_t* rsp_dp_data_len);
 static uint32_t open_with_nopwd_remote_setkey_handler(void* cmd_dp_data, void* rsp_dp_data, uint8_t* rsp_dp_data_len);
 static uint32_t open_with_nopwd_remote_handler(void* cmd_dp_data, void* rsp_dp_data, uint8_t* rsp_dp_data_len);
+static uint32_t offline_pwd_set_T0_handler(void* cmd_dp_data, void* rsp_dp_data, uint8_t* rsp_dp_data_len);
 
 /*********************************************************************
  * VARIABLES
@@ -51,7 +52,7 @@ uint32_t lock_dp_parser_handler(void* dp_data)
     //init cmd and rsp
     memcpy(&g_cmd, dp_data, sizeof(lock_dp_t));
     memcpy(&g_rsp, dp_data, sizeof(lock_dp_t));
-    APP_DEBUG_HEXDUMP("dp_cmd", 20, (void*)&g_cmd, g_cmd.dp_data_len+3);
+    APP_DEBUG_HEXDUMP("dp_cmd", (void*)&g_cmd, g_cmd.dp_data_len+3);
     
     switch(g_cmd.dp_id)
     {
@@ -210,7 +211,7 @@ uint32_t lock_dp_parser_handler(void* dp_data)
             if(g_cmd.dp_data_len == 4)
             {
                 uint32_t value;
-                value = (g_cmd.dp_data[1]<<24) + (g_cmd.dp_data[2]<<16) + (g_cmd.dp_data[3]<<8) + g_cmd.dp_data[4];
+                value = (g_cmd.dp_data[0]<<24) + (g_cmd.dp_data[1]<<16) + (g_cmd.dp_data[2]<<8) + g_cmd.dp_data[3];
                 lock_settings.timer_lock = value;
                 if(lock_settings_save() == APP_PORT_SUCCESS) {
                     APP_DEBUG_PRINTF("WR_SET_TIMER_LOCK SUCCESS");
@@ -222,7 +223,7 @@ uint32_t lock_dp_parser_handler(void* dp_data)
             if(g_cmd.dp_data_len == 4)
             {
                 uint32_t value;
-                value = (g_cmd.dp_data[1]<<24) + (g_cmd.dp_data[2]<<16) + (g_cmd.dp_data[3]<<8) + g_cmd.dp_data[4];
+                value = (g_cmd.dp_data[0]<<24) + (g_cmd.dp_data[1]<<16) + (g_cmd.dp_data[2]<<8) + g_cmd.dp_data[3];
                 lock_settings.timer_auto_lock = value;
                 if(lock_settings_save() == APP_PORT_SUCCESS) {
                     APP_DEBUG_PRINTF("WR_SET_TIMER_AUTO_LOCK SUCCESS");
@@ -234,7 +235,7 @@ uint32_t lock_dp_parser_handler(void* dp_data)
             if(g_cmd.dp_data_len == 4)
             {
                 uint32_t value;
-                value = (g_cmd.dp_data[1]<<24) + (g_cmd.dp_data[2]<<16) + (g_cmd.dp_data[3]<<8) + g_cmd.dp_data[4];
+                value = (g_cmd.dp_data[0]<<24) + (g_cmd.dp_data[1]<<16) + (g_cmd.dp_data[2]<<8) + g_cmd.dp_data[3];
                 lock_settings.finger_number = value;
                 if(lock_settings_save() == APP_PORT_SUCCESS) {
                     APP_DEBUG_PRINTF("WR_SET_FINGER_NUM SUCCESS");
@@ -267,7 +268,17 @@ uint32_t lock_dp_parser_handler(void* dp_data)
             {
                 lock_settings.motor_torque = g_cmd.dp_data[0];
                 if(lock_settings_save() == APP_PORT_SUCCESS) {
-                    APP_DEBUG_PRINTF("WR_SET_MOTOR_DIRECTION SUCCESS");
+                    APP_DEBUG_PRINTF("WR_SET_MOTOR_TORQUE SUCCESS");
+                }
+            }
+        } break;
+        
+        case WR_SET_AWAYHOME_ARMING_SWITCH: {
+            if((g_cmd.dp_data_len == 1) && (g_cmd.dp_data[0] <= 0x01))
+            {
+                lock_settings.awayhome_arming = g_cmd.dp_data[0];
+                if(lock_settings_save() == APP_PORT_SUCCESS) {
+                    APP_DEBUG_PRINTF("WR_SET_AWAYHOME_ARMING_SWITCH SUCCESS");
                 }
             }
         } break;
@@ -290,6 +301,10 @@ uint32_t lock_dp_parser_handler(void* dp_data)
         
         case WR_BSC_OPEN_WITH_NOPWD_REMOTE: {
             open_with_nopwd_remote_handler(g_cmd.dp_data, g_rsp.dp_data, &g_rsp.dp_data_len);
+        } break;
+        
+        case WR_BSC_SET_T0: {
+            offline_pwd_set_T0_handler(g_cmd.dp_data, g_rsp.dp_data, &g_rsp.dp_data_len);
         } break;
         
         default: {
@@ -317,19 +332,29 @@ static uint32_t open_meth_creat_handler(void* cmd_dp_data, void* rsp_dp_data, ui
     switch(cmd->meth)
     {
         case OPEN_METH_PASSWORD: {
-            if(lock_get_hardid(cmd->meth) != HARD_ID_INVALID)
+            if(cmd->stage == REG_STAGE_STSRT)
             {
-                APP_DEBUG_PRINTF("OPEN_METH_PASSWORD creat start");
-                lock_hard_creat_sub_report_with_delay(cmd->meth, REG_STAGE_COMPLETE, lock_get_hardid(cmd->meth), REG_NOUSE_DEFAULT_VALUE, REG_NOUSE_DEFAULT_VALUE);
-                lock_hard_save_in_local_flash(cmd->meth);
+                if(lock_get_hardid(cmd->meth) != HARD_ID_INVALID)
+                {
+                    APP_DEBUG_PRINTF("OPEN_METH_PASSWORD creat start");
+                    if(g_auto_switch.creat_pw_flag == 0) {
+                        lock_hard_creat_sub_report_with_delay(cmd->meth, REG_STAGE_COMPLETE, lock_get_hardid(cmd->meth), REG_NOUSE_DEFAULT_VALUE, REG_NOUSE_DEFAULT_VALUE);
+                        lock_hard_save_in_local_flash(cmd->meth);
+                    }
+                }
+                else
+                {//hardid is used up
+                    APP_DEBUG_PRINTF("OPEN_METH_PASSWORD hardid is used up");
+                    lock_hard_creat_sub_report_with_delay(cmd->meth, REG_STAGE_FAILED, lock_get_hardid(cmd->meth), REG_STAGE_STSRT, REG_FAILD_NO_HARDID);
+                }
+                rsp->reg_num = 0x00; //password doesn't need this
             }
-            else
-            {//hardid is used up
-                APP_DEBUG_PRINTF("OPEN_METH_PASSWORD hardid is used up");
-                lock_hard_creat_sub_report_with_delay(cmd->meth, REG_STAGE_FAILED, lock_get_hardid(cmd->meth), REG_STAGE_STSRT, REG_FAILD_NO_HARDID);
+            else if(cmd->stage == REG_STAGE_CANCEL)
+            {
+                APP_DEBUG_PRINTF("OPEN_METH_PASSWORD REG_STAGE_CANCEL");
+//                app_common_evt_send_only_evt(APP_EVT_CANCEL_REG_CARD);
+                rsp->reg_num = REG_NOUSE_DEFAULT_VALUE;
             }
-
-            rsp->reg_num = 0x00; //password doesn't need this
             rsp->result = REG_NOUSE_DEFAULT_VALUE; //default, no sence
         } break;
         
@@ -338,6 +363,7 @@ static uint32_t open_meth_creat_handler(void* cmd_dp_data, void* rsp_dp_data, ui
             {
                 if(lock_get_hardid(cmd->meth) != HARD_ID_INVALID)
                 {
+                    APP_DEBUG_PRINTF("OPEN_METH_DOORCARD creat start");
                     app_common_evt_send_with_data(APP_EVT_START_REG_CARD, cmd, sizeof(open_meth_creat_t));
                 }
                 else
@@ -362,6 +388,7 @@ static uint32_t open_meth_creat_handler(void* cmd_dp_data, void* rsp_dp_data, ui
             {
                 if(lock_get_hardid(cmd->meth) != HARD_ID_INVALID)
                 {
+                    APP_DEBUG_PRINTF("OPEN_METH_FINGER creat start");
                     app_common_evt_send_with_data(APP_EVT_START_REG_FINGER, cmd, sizeof(open_meth_creat_t));
                 }
                 else
@@ -386,6 +413,7 @@ static uint32_t open_meth_creat_handler(void* cmd_dp_data, void* rsp_dp_data, ui
             {
                 if(lock_get_hardid(cmd->meth) != HARD_ID_INVALID)
                 {
+                    APP_DEBUG_PRINTF("OPEN_METH_FACE creat start");
                     app_common_evt_send_with_data(APP_EVT_START_REG_FACE, cmd, sizeof(open_meth_creat_t));
                 }
                 else
@@ -859,7 +887,13 @@ static uint32_t open_with_nopwd_remote_setkey_handler(void* cmd_dp_data, void* r
     
     rsp->memberid = cmd->memberid;
     
-    ret = app_port_kv_set(OPEN_WITH_NOPWD_REMOTE_KEY, cmd, sizeof(open_with_nopwd_remote_setkey_t));
+    app_port_reverse_byte(&cmd->memberid, sizeof(uint16_t));
+    app_port_reverse_byte(&cmd->time_begin, sizeof(uint32_t));
+    app_port_reverse_byte(&cmd->time_end, sizeof(uint32_t));
+    app_port_reverse_byte(&cmd->valid_num, sizeof(uint16_t));
+    
+    APP_DEBUG_PRINTF("WR_BSC_OPEN_WITH_NOPWD_REMOTE_SETKEY: time_begin-%d, time_end-%d", cmd->time_begin, cmd->time_end);
+    ret = app_port_nv_set(SF_AREA_0, NV_ID_OPEN_WITH_NOPWD_REMOTE, cmd, sizeof(open_with_nopwd_remote_setkey_t));
     if(ret == APP_PORT_SUCCESS) {
         rsp->result = 0x00;
     } else {
@@ -885,7 +919,7 @@ static uint32_t open_with_nopwd_remote_handler(void* cmd_dp_data, void* rsp_dp_d
     uint32_t timestamp = app_port_get_timestamp();
     
     open_with_nopwd_remote_setkey_t set_cmd;
-    app_port_kv_get(OPEN_WITH_NOPWD_REMOTE_KEY, &set_cmd, sizeof(open_with_nopwd_remote_setkey_t));
+    app_port_nv_get(SF_AREA_0, NV_ID_OPEN_WITH_NOPWD_REMOTE, &set_cmd, sizeof(open_with_nopwd_remote_setkey_t));
     
     if(!set_cmd.valid) {
         rsp->result = 0x02;
@@ -914,11 +948,12 @@ static uint32_t open_with_nopwd_remote_handler(void* cmd_dp_data, void* rsp_dp_d
             APP_DEBUG_PRINTF("OPEN_WITH_NOPWD_REMOTE success");
             
             set_cmd.valid_num--;
-            app_port_kv_set(OPEN_WITH_NOPWD_REMOTE_KEY, &set_cmd, sizeof(open_with_nopwd_remote_setkey_t));
+            app_port_nv_set(SF_AREA_0, NV_ID_OPEN_WITH_NOPWD_REMOTE, cmd, sizeof(open_with_nopwd_remote_setkey_t));
             
             rsp->result = 0x00; //open success
         } else {
             rsp->result = 0x01; //open fail
+            APP_DEBUG_PRINTF("OPEN_WITH_NOPWD_REMOTE fail id: %d", rsp->result);
         }
     }
     
@@ -927,7 +962,17 @@ static uint32_t open_with_nopwd_remote_handler(void* cmd_dp_data, void* rsp_dp_d
     return APP_PORT_SUCCESS;
 }
 
-
+/*********************************************************
+FN: 
+*/
+static uint32_t offline_pwd_set_T0_handler(void* cmd_dp_data, void* rsp_dp_data, uint8_t* rsp_dp_data_len)
+{
+    uint32_t T0_tmp = 0;
+    app_port_string_op_intstr2int(cmd_dp_data, 10, (void*)&T0_tmp);
+    lock_offline_pwd_set_T0(T0_tmp);
+    
+    return APP_PORT_SUCCESS;
+}
 
 
 

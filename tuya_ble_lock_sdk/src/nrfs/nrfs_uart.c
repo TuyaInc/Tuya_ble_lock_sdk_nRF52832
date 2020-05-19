@@ -91,7 +91,7 @@ FN: Function for initializing the UART module.
 */
 ret_code_t nrfs_uart_send(const uint8_t* buf, uint32_t size)
 {
-    NRFS_HEXDUMP("TX", 20, (void*)buf, size);
+    NRFS_HEXDUMP("TX", (void*)buf, size);
     ret_code_t err_code;
     for(uint32_t idx=0; idx<size; idx++)
     {

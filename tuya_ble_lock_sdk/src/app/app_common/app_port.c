@@ -47,34 +47,51 @@ uint32_t app_port_free(void* buf)
 /*********************************************************
 FN: 
 */
-uint32_t app_port_kv_init(void)
+uint32_t app_port_nv_init(void)
 {
     nrfs_flash_init();
-    return easyflash_init();
+    sf_nv_init(SF_AREA_0);
+    sf_nv_init(SF_AREA_1);
+    sf_nv_init(SF_AREA_2);
+    sf_nv_init(SF_AREA_3);
+    return APP_PORT_SUCCESS;
 }
 
 /*********************************************************
 FN: 
 */
-uint32_t app_port_kv_set(const char *key, const void *buf, size_t size)
+uint32_t app_port_nv_set(uint32_t area_id, uint16_t id, void *buf, uint8_t size)
 {
-    return ef_set_env_blob(key, buf, size);
+    return sf_nv_write(area_id, id, buf, size);
 }
 
 /*********************************************************
 FN: 
 */
-uint32_t app_port_kv_get(const char *key, void *buf, size_t size)
+uint32_t app_port_nv_get(uint32_t area_id, uint16_t id, void *buf, uint8_t size)
 {
-    return ef_get_env_blob(key, buf, size, NULL);
+    return sf_nv_read(area_id, id, buf, size);
 }
 
 /*********************************************************
 FN: 
 */
-uint32_t app_port_kv_del(const char *key)
+uint32_t app_port_nv_del(uint32_t area_id, uint16_t id)
 {
-    return ef_del_env(key);
+    return sf_nv_delete(area_id, id);
+}
+
+/*********************************************************
+FN: 
+*/
+uint32_t app_port_nv_set_default(void)
+{
+    sf_port_flash_erase(SF_AREA0_BASE, 2);
+    sf_port_flash_erase(SF_AREA1_BASE, 2);
+    sf_port_flash_erase(SF_AREA2_BASE, 2);
+    sf_port_flash_erase(SF_AREA3_BASE, 2);
+//    sf_port_flash_erase(SF_AREA4_BASE, 2);
+    return APP_PORT_SUCCESS;
 }
 
 /*********************************************************
@@ -83,6 +100,14 @@ FN:
 uint32_t app_port_nv_write(uint32_t addr, const uint8_t* p_data, uint32_t size)
 {
     return tuya_ble_nv_write(addr, p_data, size);
+}
+
+/*********************************************************
+FN: 
+*/
+uint32_t app_port_nv_read(uint32_t addr, uint8_t* p_data, uint32_t size)
+{
+    return tuya_ble_nv_read(addr, p_data, size);
 }
 
 /*********************************************************
@@ -153,6 +178,14 @@ uint32_t app_port_get_old_timestamp(uint32_t old_local_timestamp)
     return nrfs_get_old_timestamp(old_local_timestamp);
 }
 
+/*********************************************************
+FN: 
+*/
+uint32_t app_port_delay_ms(uint32_t ms)
+{
+    nrfs_delay_ms(ms);
+    return APP_PORT_SUCCESS;
+}
 
 /*********************************************************  ble  *********************************************************/
 
@@ -163,10 +196,10 @@ uint32_t app_port_dp_data_report(uint8_t *buf, uint32_t size)
 {
     if(app_port_get_connect_status() == BONDING_CONN)
     {
-        APP_DEBUG_HEXDUMP("dp_rsp", 20, buf, size);
+        APP_DEBUG_HEXDUMP("dp_rsp", buf, size);
         return tuya_ble_dp_data_report(buf, size);
     } else {
-        APP_DEBUG_HEXDUMP("dp_rsp_unconn", 20, buf, size);
+        APP_DEBUG_HEXDUMP("dp_rsp_unconn", buf, size);
         return APP_PORT_ERROR_COMMON;
     }
 }
@@ -179,11 +212,11 @@ uint32_t app_port_dp_data_with_time_report(uint32_t timestamp, uint8_t *buf, uin
     if(app_port_get_connect_status() == BONDING_CONN)
     {
         APP_DEBUG_PRINTF("timestamp: %d", timestamp);
-        APP_DEBUG_HEXDUMP("dp_rsp_timestamp", 20, buf, size);
+        APP_DEBUG_HEXDUMP("dp_rsp_timestamp", buf, size);
         return tuya_ble_dp_data_with_time_report(timestamp, buf, size);
     } else {
         APP_DEBUG_PRINTF("timestamp: %d", timestamp);
-        APP_DEBUG_HEXDUMP("dp_rsp_timestamp_unconn", 20, buf, size);
+        APP_DEBUG_HEXDUMP("dp_rsp_timestamp_unconn", buf, size);
         return APP_PORT_ERROR_COMMON;
     }
 }
@@ -196,7 +229,7 @@ uint32_t app_port_ota_rsp(tuya_ble_ota_data_response_t *rsp)
     if(rsp->type != TUYA_BLE_OTA_DATA)
     {
         APP_DEBUG_PRINTF("ota_rsp_type: %d", rsp->type);
-        APP_DEBUG_HEXDUMP("ota_rsp_data", 20, rsp->p_data, rsp->data_len);
+        APP_DEBUG_HEXDUMP("ota_rsp_data", rsp->p_data, rsp->data_len);
     }
     return tuya_ble_ota_response(rsp);
 }
@@ -399,6 +432,24 @@ void app_port_reverse_byte(void* buf, uint32_t size)
     cpt_reverse_byte(buf, size);
 }
 
+/*********************************************************
+FN: 
+*/
+uint32_t app_port_num_array_2_int(uint8_t *num_array, uint32_t start_idx, uint32_t size)
+{
+    return cpt_num_array_2_int(num_array, start_idx, size);
+}
+
+/*********************************************************
+FN: 
+*/
+bool app_port_aes128_cbc_encrypt(uint8_t *key,uint8_t *iv,uint8_t *input,uint16_t input_len,uint8_t *output)
+{
+    return tuya_ble_aes128_cbc_encrypt(key, iv, input, input_len, output);
+}
+
+
+
 
 /*********************************************************  string  *********************************************************/
 
@@ -415,6 +466,10 @@ uint8_t app_port_string_op_hex2hexstr(uint8_t *hex, int len, uint8_t* hexstr)
 	return ty_string_op_hex2hexstr(hex, len, hexstr);
 }
 
+uint8_t app_port_string_op_intstr2int(uint8_t *hex, int len, int* sum)
+{
+	return ty_string_op_intstr2int(hex, len, sum);
+}
 
 
 
