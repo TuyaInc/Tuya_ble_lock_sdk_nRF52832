@@ -122,7 +122,7 @@ void app_active_report_finished_and_disconnect_handler(void)
         APP_DEBUG_PRINTF("app_active_report_finished_and_disconnect_handler");
     }
     else {
-        APP_DEBUG_PRINTF("app_active_report is not running or device is not bonding");
+//        APP_DEBUG_PRINTF("app_active_report is not running or device is not bonding");
     }
 }
 

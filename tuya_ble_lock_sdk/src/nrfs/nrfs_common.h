@@ -114,7 +114,7 @@ extern "C"
  */
 void nrfs_log_init(void);
 void nrfs_log_hexdump(const char *name, uint8_t *buf, uint16_t size);
-void nrfs_log_hexdump_empty(const char *name, uint8_t width, uint8_t *buf, uint16_t size);
+void nrfs_log_hexdump_empty(const char *name, uint8_t *buf, uint16_t size);
 
 void nrfs_system_reset(void);
 void nrfs_enter_critical(void);

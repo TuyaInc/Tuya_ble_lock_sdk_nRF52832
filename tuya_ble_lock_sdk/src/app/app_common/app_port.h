@@ -46,15 +46,15 @@ extern "C"
  * CONSTANTS
  */
 /*********************************************************  tuya  *********************************************************/
-#define TUYA_DEVICE_PID         "3bmxfsql"
-#define TUYA_DEVICE_DID         "tuya227c906c10df"                 //16Byte
-#define TUYA_DEVICE_AUTH_KEY    "hG0bTzevOpzC42n2g77FBj4zb7iXf1jE" //32Byte
+#define TUYA_DEVICE_PID                  "3bmxfsql"
+#define TUYA_DEVICE_DID                  "tuya227c906c10df"                 //16Byte
+#define TUYA_DEVICE_AUTH_KEY             "hG0bTzevOpzC42n2g77FBj4zb7iXf1jE" //32Byte
 
-#define TUYA_DEVICE_FIR_NAME    "tuya_ble_lock_common_bk3431q"    //固件标识名
-#define TUYA_DEVICE_FVER_NUM    0x00000104                         //固件版本
-#define TUYA_DEVICE_HVER_NUM    0x00000100                         //硬件版本
-#define TUYA_DEVICE_FVER_STR    "1.4"                              //固件版本str
-#define TUYA_DEVICE_HVER_STR    "1.0"                              //硬件版本str
+#define TUYA_DEVICE_FIR_NAME             "tuya_ble_lock_common_bk3431q"     //固件标识名
+#define TUYA_DEVICE_FVER_NUM             0x00000104                         //固件版本
+#define TUYA_DEVICE_HVER_NUM             0x00000100                         //硬件版本
+#define TUYA_DEVICE_FVER_STR             "1.4"                              //固件版本str
+#define TUYA_DEVICE_HVER_STR             "1.0"                              //硬件版本str
 
 /*********************************************************  ble  *********************************************************/
 #define APP_PORT_DEFAULT_MAC_ADDR_STR    "DC234D08C8EB"
@@ -68,16 +68,16 @@ extern "C"
 /*********************************************************  app_port  *********************************************************/
 #define APP_PORT_DEBUG_EN 1
 #if (APP_PORT_DEBUG_EN)
-    #define APP_DEBUG_PRINTF(...)  NRFS_PRINTF(__VA_ARGS__)
-    #define APP_DEBUG_HEXDUMP      nrfs_log_hexdump
+    #define APP_DEBUG_PRINTF(...)        NRFS_PRINTF(__VA_ARGS__)
+    #define APP_DEBUG_HEXDUMP            nrfs_log_hexdump
 #else
     #define APP_DEBUG_PRINTF(...)
-    #define APP_DEBUG_HEXDUMP      nrfs_log_hexdump_empty
+    #define APP_DEBUG_HEXDUMP            nrfs_log_hexdump_empty
 #endif
 
 //addr len
-#define APP_PORT_BLE_ADDR_LEN        (6)
-#define APP_PORT_BLE_ADDR_STR_LEN    (APP_PORT_BLE_ADDR_LEN*2)
+#define APP_PORT_BLE_ADDR_LEN            (6)
+#define APP_PORT_BLE_ADDR_STR_LEN        (APP_PORT_BLE_ADDR_LEN*2)
 
 //return value
 typedef enum {
