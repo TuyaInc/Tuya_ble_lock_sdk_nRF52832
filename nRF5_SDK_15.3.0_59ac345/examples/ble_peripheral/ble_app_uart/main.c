@@ -57,7 +57,7 @@ void app_error_fault_handler(uint32_t id, uint32_t pc, uint32_t info)
 
     NRFS_PRINTF("System reset");
     NRF_LOG_FINAL_FLUSH();
-    NVIC_SystemReset();
+//    NVIC_SystemReset();
 }
 
 /*********************************************************

@@ -287,7 +287,6 @@ void nrfs_init_bt_mac_addr(void)
     if(APP_PORT_BLE_ADDR_STR_LEN == app_port_nv_get(SF_AREA_0, NV_ID_APP_TEST_MAC_STR, tmp_mac_str, APP_PORT_BLE_ADDR_STR_LEN)) {
         is_auth = true;
     }
-    
     if(app_port_string_op_hexstr2hex(tmp_mac_str, APP_PORT_BLE_ADDR_STR_LEN, mac) == 1)
     {
         if(!is_auth) {
@@ -320,7 +319,7 @@ ret_code_t nrfs_set_bt_mac_addr(uint8_t *addr)
 
     ble_gap_addr_t p_addr;
     memset(&p_addr, 0, sizeof(p_addr));
-    p_addr.addr_type = BLE_GAP_ADDR_TYPE_RANDOM_STATIC;
+    p_addr.addr_type = BLE_GAP_ADDR_TYPE_PUBLIC;
     memcpy(p_addr.addr, addr, BLE_GAP_ADDR_LEN);
     
     err_code = sd_ble_gap_addr_set(&p_addr);
