@@ -280,16 +280,22 @@ FN:
 */
 void nrfs_init_bt_mac_addr(void)
 {
-    bool is_auth = false;
+    uint8_t auth = 0;
     //set bt addr
     uint8_t tmp_mac_str[APP_PORT_BLE_ADDR_STR_LEN] = APP_PORT_DEFAULT_MAC_ADDR_STR;
     uint8_t mac[APP_PORT_BLE_ADDR_LEN];
-    if(APP_PORT_BLE_ADDR_STR_LEN == app_port_nv_get(SF_AREA_0, NV_ID_APP_TEST_MAC_STR, tmp_mac_str, APP_PORT_BLE_ADDR_STR_LEN)) {
-        is_auth = true;
+    uint8_t tmp_mac_in_flash[APP_PORT_BLE_ADDR_STR_LEN];
+    uint8_t tmp_mac_invalid[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+    
+    nrfs_flash_read(NRFS_FLASH_BLE_MAC_ADDR, tmp_mac_in_flash, APP_PORT_BLE_ADDR_STR_LEN);
+    if(memcmp(tmp_mac_in_flash, tmp_mac_invalid, APP_PORT_BLE_ADDR_STR_LEN) != 0) {
+        memcpy(tmp_mac_str, tmp_mac_in_flash, APP_PORT_BLE_ADDR_STR_LEN);
+        auth = 1;
     }
+        
     if(app_port_string_op_hexstr2hex(tmp_mac_str, APP_PORT_BLE_ADDR_STR_LEN, mac) == 1)
     {
-        if(!is_auth) {
+        if(!auth) {
             app_port_reverse_byte(mac, APP_PORT_BLE_ADDR_LEN);
         }
         APP_DEBUG_HEXDUMP("Mac", mac, APP_PORT_BLE_ADDR_LEN);

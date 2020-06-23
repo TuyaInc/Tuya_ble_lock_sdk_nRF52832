@@ -221,7 +221,8 @@ static void app_test_write_auth_info_handler(uint8_t cmd, uint8_t* buf, uint16_t
     if(app_port_string_op_hexstr2hex(&buf[78], APP_PORT_BLE_ADDR_STR_LEN, mac) == 1)
     {
         app_port_set_bt_mac_addr(&mac[0]);
-        app_port_nv_set(SF_AREA_0, NV_ID_APP_TEST_MAC_STR, &buf[78], APP_PORT_BLE_ADDR_STR_LEN);
+        nrfs_flash_erase(NRFS_FLASH_BLE_MAC_ADDR, 1, true);
+        nrfs_flash_write(NRFS_FLASH_BLE_MAC_ADDR, &buf[78], APP_PORT_BLE_ADDR_STR_LEN, true);
         
         uint8_t tmp_buf[] = "{\"ret\":true}";
         app_test_rsp(APP_TEST_CMD_WRITE_AUTH_INFO, tmp_buf, strlen((void*)tmp_buf));
@@ -301,7 +302,7 @@ static void app_test_query_info_handler(uint8_t cmd, uint8_t* buf, uint16_t size
         tmp_buf[i++] = '\"';
         tmp_buf[i++] = ':';
         tmp_buf[i++] = '\"';
-        app_port_nv_get(SF_AREA_0, NV_ID_APP_TEST_MAC_STR, &tmp_buf[i], APP_PORT_BLE_ADDR_STR_LEN);
+        nrfs_flash_read(NRFS_FLASH_BLE_MAC_ADDR, &tmp_buf[i], APP_PORT_BLE_ADDR_STR_LEN);
         i += APP_PORT_BLE_ADDR_STR_LEN;
         tmp_buf[i++] = '\"';
 

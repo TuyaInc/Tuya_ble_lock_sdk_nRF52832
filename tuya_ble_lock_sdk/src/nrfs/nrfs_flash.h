@@ -35,6 +35,8 @@ extern "C"
 #define NRFS_FLASH_OTA_START_ADDR    NRFS_FLASH_START_ADDR
 #define NRFS_FLASH_OTA_END_ADDR      0x66000
 
+#define NRFS_FLASH_BLE_MAC_ADDR      0x77000
+
 /*********************************************************************
  * STRUCT
  */
