@@ -1,0 +1,29 @@
+             _________ 
+0x00080000 -|         |
+            |    B    |-- 4k, BOOTLOADER_SETTINGS_ADDRESS
+0x0007F000 -|---------|
+            |    A    |-- 4k, BOOTLOADER_SETTINGS_BACKUP_ADDRESS
+0x0007E000 -|---------|
+            |    9    |-- 4k, NRF_MBR_PARAMS_PAGE_ADDRESS
+0x0007D000 -|---------|
+            |    8    |-- 4k, unknow
+0x0007C000 -|---------|
+            |    7    |-- 16k, bootloader
+0x00078000 -|---------|
+            |    6    |-- 4k, Mac
+0x00077000 -|---------|
+            |    5    |-- 52k, unused（default simpleflash from 0x0006A000 to 0x00074000, 40k）
+0x0006A000 -|---------|
+            |    4    |-- 16k, tuya_ble_sdk info
+0x00066000 -|---------|
+            |    3    |-- 128k, ota
+0x00046000 -|---------|
+            |    2    |-- 128k, app
+0x00026000 -|---------|
+            |    1    |-- 148k, softdevice
+0x00001000 -|---------|
+            |    0    |-- 4k, MBR
+0x00000000 -|_________|
+
+
+

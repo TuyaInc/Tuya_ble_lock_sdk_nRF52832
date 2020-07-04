@@ -303,7 +303,7 @@ void lock_hard_uart_simulate(uint8_t cmd, uint8_t* data, uint16_t len)
             }
             else if(ret == OFFLINE_PWD_CLEAR_ALL_SUCCESS) {
                 lock_open_record_report_offline_pwd(OR_LOG_ALARM_OFFLINE_PWD_CLEAR_ALL, encrypt_pwd);
-//                APP_DEBUG_PRINTF("clear_all_with_offline_pwd_success");
+                APP_DEBUG_PRINTF("clear_all_with_offline_pwd_success");
             }
             else {
                 APP_DEBUG_PRINTF("lock_open_with_offline_pwd_fail");

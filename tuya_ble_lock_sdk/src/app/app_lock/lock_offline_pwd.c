@@ -227,6 +227,7 @@ static int32_t lock_offline_pwd_find(uint32_t T_now)
     lock_offline_pwd_find_info_t info_invalid_pwd;
     lock_offline_pwd_find_info_t info_valid_pwd;
     lock_offline_pwd_find_info_t info_single_pwd;
+    lock_offline_pwd_find_info_t info_clear_all;
     
     // 离线密码存储优先级
     // 1.未使用的
@@ -234,9 +235,11 @@ static int32_t lock_offline_pwd_find(uint32_t T_now)
     // 3.时效密码中密码状态为无效的，找失效时间最早的
     // 4.时效密码中密码状态为有效的，找生效时间最早的
     // 5.如都是单次密码，找失效时间最早的
+    // 6.如都是清空所有密码，找失效时间最早的
     info_invalid_pwd.found = false;
     info_valid_pwd.found   = false;
     info_single_pwd.found  = false;
+    info_clear_all.found = false;
     
     for (int32_t idx=0; idx<OFFLINE_PWD_MAX_NUM; idx++)
     {
@@ -298,6 +301,17 @@ static int32_t lock_offline_pwd_find(uint32_t T_now)
                     info_single_pwd.pwdid = idx;
                 }
             }
+            //如都是清空所有密码，找失效时间最早的
+            else if (pwd_storage.type == PWD_TYPE_CLEAR_ALL) {
+                if (!info_clear_all.found) {
+                    info_clear_all.found = true;
+                    info_clear_all.min_T = T3;
+                    info_clear_all.pwdid = idx;
+                } else if (T3 < info_clear_all.min_T) {
+                    info_clear_all.min_T = T3;
+                    info_clear_all.pwdid = idx;
+                }
+            }
         }
 	}
 
@@ -310,6 +324,9 @@ static int32_t lock_offline_pwd_find(uint32_t T_now)
         }
         else if (info_single_pwd.found) {
             find_pwdid = info_single_pwd.pwdid;
+        }
+        else if (info_clear_all.found) {
+            find_pwdid = info_clear_all.pwdid;
         }
         APP_DEBUG_PRINTF("all pwdid full, cover id->[%d]", find_pwdid);
     }
@@ -324,7 +341,6 @@ RT: >= 0 exist
 */
 static int32_t is_offline_pwd_exist(enum_offline_pwd_type_t type, uint32_t pwd_int, lock_offline_pwd_storage_t *data)
 {
-	int32_t pwdid = -1;
 	for (int32_t idx=0; idx<s_offline_pwd_count; idx++)
     {
         lock_offline_pwd_storage_t pwd_storage = {0};
@@ -333,12 +349,12 @@ static int32_t is_offline_pwd_exist(enum_offline_pwd_type_t type, uint32_t pwd_i
 		if ((pwd_storage.status != PWD_STATUS_UNUSED)
             && (pwd_storage.type == type)
             && (pwd_storage.pwd == pwd_int)) {
-			pwdid = idx;
+            
 			memcpy(data, &pwd_storage, sizeof(lock_offline_pwd_storage_t));
-			break;
+            return idx;
 		}
 	}
-	return pwdid;
+	return -1;
 }
 
 /*********************************************************
@@ -377,10 +393,10 @@ static int32_t lock_offline_pwd_clear(enum_offline_pwd_type_t type, uint32_t pwd
             if(pwd_storage.status == PWD_STATUS_VALID) {
                 pwd_storage.status = PWD_STATUS_INVALID;
                 lock_offline_pwd_save(idx, &pwd_storage);
-                APP_DEBUG_PRINTF("PWD_TYPE_CLEAR_ALL: %d", idx);
             }
         }
 	}
+    APP_DEBUG_PRINTF("OFFLINE_PWD_CLEAR_ALL_SUCCESS");
 	return OFFLINE_PWD_CLEAR_ALL_SUCCESS;
 }
 
@@ -534,8 +550,17 @@ int32_t lock_offline_pwd_verify(uint8_t *key, uint8_t key_len,
     //清除所有密码
     else if (pwd->type == PWD_TYPE_CLEAR_ALL)
     {
-        //检查时效性
-        if ((T_now - T2) > PWD_ACTIVE_PERIOD_CLEAR_ALL) {
+        int32_t exist_pwdid = 0;
+        lock_offline_pwd_storage_t pwd_storage = {0};
+        exist_pwdid = is_offline_pwd_exist((enum_offline_pwd_type_t)pwd->type, num_1_9, &pwd_storage);
+        APP_DEBUG_PRINTF("is_offline_pwd_exist, pwdid-->[%d]", exist_pwdid);
+        //离线密码已经存在
+        if (exist_pwdid >= 0) {
+            APP_DEBUG_PRINTF("OFFLINE_PWD_ERR_INVALID");
+            return OFFLINE_PWD_ERR_INVALID;
+        }
+        //离线密码超过激活周期
+		else if ((T_now - T2) > PWD_ACTIVE_PERIOD_CLEAR_ALL) {
             APP_DEBUG_PRINTF("OFFLINE_PWD_ERR_ACTIVE_TIME");
 			return OFFLINE_PWD_ERR_ACTIVE_TIME;
         }
@@ -543,8 +568,21 @@ int32_t lock_offline_pwd_verify(uint8_t *key, uint8_t key_len,
             APP_DEBUG_PRINTF("OFFLINE_PWD_ERR_BSS_SN");
             return OFFLINE_PWD_ERR_BSS_SN;
         }
-		
-		return lock_offline_pwd_clear(PWD_TYPE_CLEAR_ALL, 0);
+        //存储离线密码
+		else {
+            int32_t find_pwdid = lock_offline_pwd_find(T_now);
+			if (find_pwdid < 0) {
+				APP_DEBUG_PRINTF("OFFLINE_PWD_ERR_NO_SPACE");
+				return OFFLINE_PWD_ERR_NO_SPACE;
+			}
+			
+			pwd_storage.status = PWD_STATUS_INVALID; //清空所有密码使用一次后就失效
+			pwd_storage.type   = pwd->type;
+			pwd_storage.pwd    = num_1_9;
+            lock_offline_pwd_save(find_pwdid, &pwd_storage);
+            
+            return lock_offline_pwd_clear(PWD_TYPE_CLEAR_ALL, 0);
+        }
     }
     
     //Can't reach here

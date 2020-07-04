@@ -51,9 +51,9 @@ extern "C"
 #define TUYA_DEVICE_AUTH_KEY             "hG0bTzevOpzC42n2g77FBj4zb7iXf1jE" //32Byte
 
 #define TUYA_DEVICE_FIR_NAME             "tuya_ble_lock_common_bk3431q"     //固件标识名
-#define TUYA_DEVICE_FVER_NUM             0x00000105                         //固件版本
+#define TUYA_DEVICE_FVER_NUM             0x00000106                         //固件版本
 #define TUYA_DEVICE_HVER_NUM             0x00000100                         //硬件版本
-#define TUYA_DEVICE_FVER_STR             "1.5"                              //固件版本str
+#define TUYA_DEVICE_FVER_STR             "1.6"                              //固件版本str
 #define TUYA_DEVICE_HVER_STR             "1.0"                              //硬件版本str
 
 /*********************************************************  ble  *********************************************************/
