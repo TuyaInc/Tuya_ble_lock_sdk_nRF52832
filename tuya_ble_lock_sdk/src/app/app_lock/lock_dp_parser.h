@@ -107,7 +107,7 @@ typedef enum
     OPEN_METH_DOORCARD,
     OPEN_METH_FINGER,
     OPEN_METH_FACE,
-    OPEN_METH_TEMP_PW,
+    OPEN_METH_TEMP_PW, //实际的临时密码值为0xF0，此处为方便存储演示，取值0x05
     OPEN_METH_MAX,
 } open_meth_t;
 

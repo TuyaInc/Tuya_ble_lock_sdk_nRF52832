@@ -627,7 +627,6 @@ uint32_t lock_flash_init(void)
     
     //init s_evt_id
     lock_evtid_load();
-    lock_offline_pwd_cound_load();
     
     //if no lock_settings, set default settings
 	if(lock_settings_load() != 0)

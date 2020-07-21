@@ -222,6 +222,7 @@ static void app_common_evt_process(void *p_param)
         } break;
         
         case APP_EVT_TIMER_8: {
+            reset_with_disconn2_outtime_cb_handler();
         } break;
         
         case APP_EVT_TIMER_9: {

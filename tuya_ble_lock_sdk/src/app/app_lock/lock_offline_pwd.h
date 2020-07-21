@@ -61,8 +61,8 @@ typedef enum {
 	OFFLINE_PWD_ERR_DECRYPT          = (-2),      //解密错误
 	OFFLINE_PWD_ERR_TYPE             = (-3),      //密码类型错误
 	OFFLINE_PWD_ERR_INVALID          = (-4),      //密码状态失效
-	OFFLINE_PWD_ERR_NOT_VALID        = (-5),      //当前时间 < 生效时间，还没开始生效
-	OFFLINE_PWD_ERR_OUTTIME          = (-6),      //当前时间 > 失效时间，已经失效
+	OFFLINE_PWD_ERR_START_TIME       = (-5),      //当前时间 < 生效时间，还没开始生效
+	OFFLINE_PWD_ERR_END_TIME         = (-6),      //当前时间 > 失效时间，已经失效
 	OFFLINE_PWD_ERR_ACTIVE_TIME      = (-7),      //未在激活窗口内激活
     OFFLINE_PWD_ERR_BSS_SN           = (-8),      //错误的业务流水号
 	OFFLINE_PWD_ERR_NO_SPACE         = (-9),      //无存储空间
@@ -103,7 +103,6 @@ typedef struct
 /*********************************************************************
  * EXTERNAL FUNCTIONS
  */
-void lock_offline_pwd_cound_load(void);
 uint32_t lock_offline_pwd_delete(int32_t pwdid);
 uint32_t lock_offline_pwd_delete_all(void);
 void     lock_offline_pwd_set_T0(uint32_t T0_tmp);

@@ -69,7 +69,7 @@ FN:
 void reset_with_disconn_outtime_cb_handler(void)
 {
     app_port_ble_gap_disconnect();
-    app_port_device_reset();
+    lock_timer_start(LOCK_TIMER_RESET_WITH_DISCONN2);
 }
 static void reset_with_disconn_outtime_cb(tuya_ble_timer_t timer)
 {
@@ -132,6 +132,18 @@ static void app_active_report_outtime_cb(tuya_ble_timer_t timer)
 /*********************************************************
 FN: 
 */
+void reset_with_disconn2_outtime_cb_handler(void)
+{
+    app_port_device_reset();
+}
+static void reset_with_disconn2_outtime_cb(tuya_ble_timer_t timer)
+{
+    app_common_evt_send_only_evt(APP_EVT_TIMER_8);
+}
+
+/*********************************************************
+FN: 
+*/
 uint32_t lock_timer_creat(void)
 {
     uint32_t ret = 0;
@@ -143,6 +155,7 @@ uint32_t lock_timer_creat(void)
     ret += app_port_timer_create(&lock_timer[LOCK_TIMER_APP_TEST_OUTTIME], APP_TEST_MODE_ENTER_OUTTIME_MS, TUYA_BLE_TIMER_SINGLE_SHOT, app_test_outtime_cb);
     ret += app_port_timer_create(&lock_timer[LOCK_TIMER_APP_TEST_RESET_OUTTIME], 500, TUYA_BLE_TIMER_SINGLE_SHOT, app_test_reset_outtime_cb);
     ret += app_port_timer_create(&lock_timer[LOCK_TIMER_ACTIVE_REPORT], 30000, TUYA_BLE_TIMER_SINGLE_SHOT, app_active_report_outtime_cb);
+    ret += app_port_timer_create(&lock_timer[LOCK_TIMER_RESET_WITH_DISCONN2], 1000, TUYA_BLE_TIMER_SINGLE_SHOT, reset_with_disconn2_outtime_cb);
     //tuya_ble_xtimer_connect_monitor
     return ret;
 }

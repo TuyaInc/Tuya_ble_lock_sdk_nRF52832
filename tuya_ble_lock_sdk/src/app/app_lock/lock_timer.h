@@ -39,6 +39,7 @@ typedef enum
     LOCK_TIMER_APP_TEST_OUTTIME,
     LOCK_TIMER_APP_TEST_RESET_OUTTIME,
     LOCK_TIMER_ACTIVE_REPORT,
+    LOCK_TIMER_RESET_WITH_DISCONN2,
     LOCK_TUMER_MAX,
 } lock_timer_t;
 
@@ -66,6 +67,7 @@ void conn_monitor_outtime_cb_handler(void);
 void app_test_outtime_cb_handler(void);
 void app_test_reset_outtime_cb_handler(void);
 void app_active_report_outtime_cb_handler(void);
+void reset_with_disconn2_outtime_cb_handler(void);
 
 
 #ifdef __cplusplus
