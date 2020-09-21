@@ -344,7 +344,7 @@ u32 sf_nv_write(u32 area_id, u16 id, void *buf, u8 size)
         // 擦除原有数据
         nv_erase(S_START_ADDR(area_id), 1);
         //这个 area 满
-        update_area_header(S_START_ADDR(area_id), SF_BIT_VALID, SF_BIT_VALID);
+//        update_area_header(S_START_ADDR(area_id), SF_BIT_VALID, SF_BIT_VALID);
         //到下一个 area
         s_start_area[area_id] = sf_next_area(s_start_area[area_id]);
         update_area_header(S_START_ADDR(area_id), SF_BIT_VALID, SF_BIT_INVALID);

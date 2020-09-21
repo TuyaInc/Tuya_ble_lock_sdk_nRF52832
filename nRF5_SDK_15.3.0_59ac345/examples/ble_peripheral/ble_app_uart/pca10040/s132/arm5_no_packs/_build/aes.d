@@ -1,0 +1,13 @@
+.\_build\aes.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\cpt\mbedtls-2.16.1\library\aes.c
+.\_build\aes.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\cpt\mbedtls-2.16.1\include\mbedtls/config.h
+.\_build\aes.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\cpt\mbedtls-2.16.1\include\mbedtls/check_config.h
+.\_build\aes.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+.\_build\aes.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\_build\aes.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\cpt\mbedtls-2.16.1\include\mbedtls/aes.h
+.\_build\aes.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\_build\aes.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\_build\aes.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\cpt\mbedtls-2.16.1\include\mbedtls/platform.h
+.\_build\aes.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\_build\aes.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\_build\aes.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+.\_build\aes.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\cpt\mbedtls-2.16.1\include\mbedtls/platform_util.h

@@ -1,0 +1,12 @@
+.\_build\platform_util.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\cpt\mbedtls-2.16.1\library\platform_util.c
+.\_build\platform_util.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\cpt\mbedtls-2.16.1\include\mbedtls/config.h
+.\_build\platform_util.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\cpt\mbedtls-2.16.1\include\mbedtls/check_config.h
+.\_build\platform_util.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+.\_build\platform_util.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\cpt\mbedtls-2.16.1\include\mbedtls/platform_util.h
+.\_build\platform_util.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\_build\platform_util.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\cpt\mbedtls-2.16.1\include\mbedtls/platform.h
+.\_build\platform_util.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\_build\platform_util.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\_build\platform_util.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+.\_build\platform_util.o: ..\..\..\..\..\..\..\tuya_ble_lock_sdk\src\cpt\mbedtls-2.16.1\include\mbedtls/threading.h
+.\_build\platform_util.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
